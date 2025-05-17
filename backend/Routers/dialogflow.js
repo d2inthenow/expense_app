@@ -1,4 +1,5 @@
-import express from "express";
+const express = require("express");
+
 const router = express.Router();
 
 router.post("/dialogflow-webhook", (req, res) => {
@@ -52,4 +53,4 @@ router.post("/dialogflow-webhook", (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

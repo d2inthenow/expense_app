@@ -1,5 +1,11 @@
-import express from 'express';
-import { loginControllers, registerControllers, setAvatarController } from '../controllers/userController.js';
+const express = require("express"); // thêm dòng này
+const mongoose = require("mongoose");
+
+const {
+  loginControllers,
+  registerControllers,
+  setAvatarController,
+} = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -9,4 +15,4 @@ router.route("/login").post(loginControllers);
 
 router.route("/setAvatar/:id").post(setAvatarController);
 
-export default router;
+module.exports = router;

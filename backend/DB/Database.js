@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-export const connectDB = async () => {
+const connectDB = async () => {
   try {
     const db = process.env.MONGO_URL;
 
@@ -16,6 +16,9 @@ export const connectDB = async () => {
     console.log(`✅ MongoDB connected to: ${connection.host}`);
   } catch (error) {
     console.error(`❌ MongoDB connection error: ${error.message}`);
-    process.exit(1); // Dừng server nếu kết nối thất bại
+    process.exit(1);
   }
 };
+
+// ✅ CommonJS export
+module.exports = { connectDB };

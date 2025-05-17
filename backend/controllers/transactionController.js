@@ -1,8 +1,8 @@
-import Transaction from "../models/TransactionModel.js";
-import User from "../models/UserSchema.js";
-import moment from "moment";
+const Transaction = require("../models/TransactionModel");
+const User = require("../models/UserSchema");
+const moment = require("moment");
 
-export const addTransactionController = async (req, res) => {
+const addTransactionController = async (req, res) => {
   try {
     const {
       title,
@@ -65,7 +65,7 @@ export const addTransactionController = async (req, res) => {
   }
 };
 
-export const getAllTransactionController = async (req, res) => {
+const getAllTransactionController = async (req, res) => {
   try {
     const { userId, type, frequency, startDate, endDate } = req.body;
 
@@ -85,14 +85,14 @@ export const getAllTransactionController = async (req, res) => {
       user: userId,
     };
 
-    if (type !== 'all') {
+    if (type !== "all") {
       query.transactionType = type;
     }
 
     // Add date conditions based on 'frequency' and 'custom' range
-    if (frequency !== 'custom') {
+    if (frequency !== "custom") {
       query.date = {
-        $gt: moment().subtract(Number(frequency), "days").toDate()
+        $gt: moment().subtract(Number(frequency), "days").toDate(),
       };
     } else if (startDate && endDate) {
       query.date = {
@@ -119,8 +119,7 @@ export const getAllTransactionController = async (req, res) => {
   }
 };
 
-
-export const deleteTransactionController = async (req, res) => {
+const deleteTransactionController = async (req, res) => {
   try {
     const transactionId = req.params.id;
     const userId = req.body.userId;
@@ -168,7 +167,7 @@ export const deleteTransactionController = async (req, res) => {
   }
 };
 
-export const updateTransactionController = async (req, res) => {
+const updateTransactionController = async (req, res) => {
   try {
     const transactionId = req.params.id;
 
@@ -224,4 +223,11 @@ export const updateTransactionController = async (req, res) => {
       messages: err.message,
     });
   }
+};
+
+module.exports = {
+  addTransactionController,
+  getAllTransactionController,
+  deleteTransactionController,
+  updateTransactionController,
 };

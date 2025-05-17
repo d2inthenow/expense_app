@@ -1,7 +1,7 @@
-import User from "../models/UserSchema.js";
-import bcrypt from "bcrypt";
+const User = require("../models/UserSchema");
+const bcrypt = require("bcrypt");
 
-export const registerControllers = async (req, res, next) => {
+const registerControllers = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -47,7 +47,7 @@ export const registerControllers = async (req, res, next) => {
     });
   }
 };
-export const loginControllers = async (req, res, next) => {
+const loginControllers = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -93,7 +93,7 @@ export const loginControllers = async (req, res, next) => {
   }
 };
 
-export const setAvatarController = async (req, res, next) => {
+const setAvatarController = async (req, res, next) => {
   try {
     const userId = req.params.id;
 
@@ -117,7 +117,7 @@ export const setAvatarController = async (req, res, next) => {
   }
 };
 
-export const allUsers = async (req, res, next) => {
+const allUsers = async (req, res, next) => {
   try {
     const user = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
@@ -130,4 +130,11 @@ export const allUsers = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+module.exports = {
+  registerControllers,
+  loginControllers,
+  setAvatarController,
+  allUsers,
 };
